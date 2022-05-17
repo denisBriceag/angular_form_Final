@@ -1,0 +1,61 @@
+<section>
+  <h1>Reactive form</h1>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" formControlName="name" />
+      <div
+        *ngIf="
+          this.registrationForm.get('name').getError('required') &&
+          registrationForm.get('name').touched
+        "
+        style="color: red"
+      >
+        Sorry, but name is required
+      </div>
+      <div
+        *ngIf="
+          this.registrationForm.get('name').getError('fullName') &&
+          registrationForm.get('name').touched
+        "
+        style="color: red"
+      >
+        You should indicate full name
+      </div>
+      <div
+        *ngIf="
+          this.registrationForm.get('name').getError('isNameForbidden') &&
+          registrationForm.get('name').touched
+        "
+        style="color: red"
+      >
+        Name {{ this.registrationForm.get("name").value }} is forbidden!
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Age</label>
+      <input type="number" class="form-control" formControlName="age" />
+      <div
+        *ngIf="
+          this.registrationForm.get('age').getError('legalAge') &&
+          registrationForm.get('age').touched
+        "
+        style="color: red"
+      >
+        Sorry, you are under legal age
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email address</label>
+      <input type="email" class="form-control" formControlName="email" />
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="registrationForm.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</section>
