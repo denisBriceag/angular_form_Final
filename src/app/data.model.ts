@@ -1,5 +1,5 @@
 export interface Data {
   name: string;
-  age: string;
+  age: number;
   email: string;
 }
